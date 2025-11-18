@@ -1,0 +1,300 @@
+* {
+	margin: 0;
+	box-sizing: border-box;
+	/* RESET */
+}
+
+:root {
+	--black: #424651;
+	--azul: #bce7fd;
+	--fucsia: #af3b6e;
+	--marino: #9172d6;
+	--verde: #21fa90;
+	--font: "Cascadia Mono", sans-serif;
+} /* Esto son las variables de color y de tipografía */
+
+.practica {
+	background: var(--black);
+	font-family: var(--font);
+	/* Aplicamos las variables genéricas al contenedor principal main*/
+}
+
+/* 
+	//////////////////////////////////////////////////////////////////
+	//////////////////////////////////////////////////////////////////
+	************** ÚLTIMOS PASOS PARA AJUSTAR TIEMPOS **************
+	//////////////////////////////////////////////////////////////////
+	//////////////////////////////////////////////////////////////////
+*/
+
+.fondo /* 6º CAMBIAR TIEMPO APARICIÓN FONDO */ {
+	width: 100%;
+	height: 0;
+	opacity: 0;
+	overflow: hidden;
+	background-color: var(--verde);
+	animation: ASCENDER 3s 27s forwards;
+	/* Está oculto en la parte superior del view port y que cuando ocurre la animación ASCENDER aparece bajando como una presentación de arriba a abajo hasta ocupar todo el view port baja empujando el flow y mostrando el contenido de sus hijos */
+}
+
+@keyframes ASCENDER {
+	to {
+		height: 100vh;
+		opacity: 100%;
+	}
+}
+
+.fondo__img /* 7º CAMBIAR TIEMPO LETRAS */ {
+	background: url(../img/miau.svg);
+	/* Al ser una imagen de fondo y buscamos hacer el efecto tiras con roll */
+	width: 100%;
+	height: 0;
+	overflow: hidden;
+	animation: ROLL 8s 25s infinite linear, REAPARECER 8s 30s forwards;
+	/* Al igual que el padre contenedor, aparece después de x tiempo y permanece viendose por eso el fordwars */
+}
+
+@keyframes ROLL {
+	to {
+		background-position-x: 1200px;
+		/* Para que se desplace horizontalmente he puesto esos px para que se mueva más rápido y hacia la drcha */
+	}
+}
+
+@keyframes REAPARECER {
+	to {
+		height: 95vh;
+		/* Para que no se vea el inicio superior del texto debido al espaciado entre linea y linea */
+	}
+}
+
+.fondo__btn /* 8º CAMBIAR TIEMPO BOTÓN */ {
+	position: fixed;
+	left: 0;
+	right: 0;
+	bottom: 120px;
+	margin: auto;
+	/* FIxed para que tenga una posición concreta sin que haya problemas con los otros objetos en absolute y colocado en el centro */
+	width: 210px;
+	/* Tamaño del botón */
+	background: var(--fucsia);
+	padding: 1rem 2rem;
+	border-radius: 100px;
+	/* orden: colocación, relleno, texto y transiciones o animaciones */
+	color: white;
+	text-decoration: none;
+	font-weight: 600;
+	text-transform: uppercase;
+	opacity: 0;
+	transition: 1s;
+	animation: APARECER 1s 28s forwards;
+}
+
+@keyframes APARECER {
+	to {
+		opacity: 100%;
+	}
+}
+
+.fondo__btn:hover {
+	background-color: var(--black);
+	scale: 110%;
+}
+
+.container 
+/* 9º Y ÚLTIMO CAMBIAR LA DESAPARICIÓN MISMO 
+TIEMPO QUE LA APARICIÓN DE FONDO__IMG*/ {
+	width: 100%;
+	height: 100vh;
+	display: flex; /* para ponerlo en 2 columnas */
+	align-items: center;
+	justify-content: center;
+	animation: CONTAINER-OVERFLOW 1s 30s forwards;
+	/* para que cuando el fondo aparezca este desaparezca y evitar el scroll sino que sea solo el view port antes del corte */
+}
+
+@keyframes CONTAINER-OVERFLOW {
+	to {
+		height: 0;
+		overflow: hidden;
+	}
+}
+
+.texto-container {
+	height: 100vh;
+	flex: 0 0 50%; /* para hacer las 2 columnas */
+	display: flex; /* para que el contenido esté centrado */
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding-left: 6rem;
+	/* para que esté más a la izq y no quede tan alejado de la imagen */
+	text-align: center;
+
+	& .texto__titulo {
+		font-size: 4rem;
+		color: var(--marino);
+		margin-bottom: 3rem;
+	}
+
+	& .texto__descripcion {
+		padding: 1.2rem;
+		font-size: 1.1rem;
+		color: var(--azul);
+		letter-spacing: 0.15rem;
+		font-weight: 300;
+	}
+
+	& .texto__negrita {
+		font-size: 1.3rem; /* para que destaque un poco */
+	}
+
+	/* 
+	//////////////////////////////////////////////////////////////////
+	//////////////////////////////////////////////////////////////////
+	************** EMPEZAR POR AQUÍ PARA AJUSTAR TIEMPOS **************
+	//////////////////////////////////////////////////////////////////
+	//////////////////////////////////////////////////////////////////
+	*/
+
+	& .texto__desaparecer /* 1º TIEMPO ANOTACIÓN */ {
+		opacity: 30%;
+		animation: DESAPARECER 1s 18s forwards;
+		/* para que desaparezca */
+	}
+
+	& .video__intro /* 2º TIEMPO INTRO VIDEO */ {
+		color: var(--verde);
+		font-weight: 600;
+		opacity: 0;
+		animation: APARECER 1s 20s forwards;
+		/* animación que ya está en fondo__btn*/
+	}
+}
+
+@keyframes DESAPARECER {
+	to {
+		opacity: 0;
+	}
+}
+
+.texto__btn {
+	/* orden: colocación, relleno, texto y transiciones o animaciones */
+	background: var(--fucsia);
+	padding: 1rem 2rem;
+	margin-top: 3rem;
+	border-radius: 200px;
+	text-decoration: none;
+	color: white;
+	text-transform: uppercase;
+	letter-spacing: 0.15rem;
+	font-weight: 600;
+	opacity: 0;
+	transition: 1s;
+	/* 3º TIEMPO BOTÓN - SIMILAR A 1º */
+	animation: APARECER 1s 18s forwards;
+	/* animación que ya está en fondo__btn*/
+}
+
+.texto__btn:hover {
+	background-color: var(--verde);
+	color: var(--black);
+	scale: 110%;
+}
+
+.img-container {
+	flex: 0 0 50%;
+}
+
+.img__lata {
+	height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	& .lata__img {
+		width: 65%;
+		/* para que se vea un poco más pequeña con respecto al contenedor*/
+	}
+}
+
+.gato {
+	position: absolute;
+	top: 160px;
+	right: 560px;
+	/* para que esté en el sitio que quiero al tamaño que quiero por eso px */
+	width: 200px;
+	height: 200px;
+	transition: 1s;
+
+	/* 4º AJUSRAR TIEMPO GATO + DESAPARECER*/
+
+	animation: GATO 5s 8s 3,
+		/* para que de x vueltas sobre la animación y luego pare hay que poner un tercer numero después del tiempo */
+			DESAPARECER 1s 20s forwards;
+	/* animación que ya está en texto__desaparecer*/
+	/* para poner dos animaciones juntas es importante separar con una "," */
+
+	& img {
+		width: 100%;
+	}
+}
+
+.gato:hover {
+	filter: invert(44%) sepia(16%) saturate(1023%) hue-rotate(306deg);
+	/* invert para que salgan los colores invertidos, sepia es lo que le da ese color naranja, luego la saturación para que salga más brillante y hue-rotate para que sea invertido tmb */
+
+	/* he usado filter pq no hemos dado como cambiar el color de un svg en código */
+}
+
+@keyframes GATO {
+	20% {
+		translate: 400px 0;
+		scale: 130%;
+	}
+	40% {
+		translate: 400px 400px;
+		scale: 100%;
+	}
+
+	60% {
+		translate: -400px 480px;
+		scale: 160%;
+	}
+	80% {
+		translate: -900px -150px;
+		scale: 50%;
+	}
+	100% {
+		translate: 0 0;
+		scale: 100%;
+	}
+
+	/* importante poner que vuelve al 0 0 como reset de la animación porque sino da un salto brusco*/
+}
+
+.video__delay  /* 5º CAMBIAR APARICIÓN VIDEO */ {
+	height: 0;
+	overflow: hidden;
+	/* para que esté oculto */
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	margin: auto;
+	min-width: 45%;
+	/* para que salga así de pequeño como mínimo */
+	animation: VIDEO 1s 25s forwards;
+}
+
+@keyframes VIDEO {
+	to {
+		min-height: 45%;
+		height: auto;
+		/* para que no salga más pequeño las imagenes que el contenedor */
+		/* para que aparezca al tamaño */
+	}
+}
+
+/* Se pueden ajustar los tiempos aún más para que vaya algo más despacio */
